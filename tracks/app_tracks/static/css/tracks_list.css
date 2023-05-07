@@ -1,0 +1,26 @@
+.tbl-fixed {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 80vh;
+    margin-top: 30px;
+}
+table {
+    border-collapse: seperate;
+    table-layout: fixed;
+}
+table th {
+    position: sticky;
+    top: 0px;
+    background: gray !important;
+    text-align: center;
+    color: #fff;
+    border: 1px solid #ccc;
+    font-size: 18px !important;
+}
+table td {
+    background: #fff;
+    text-align: center;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+    vertical-align: middle;
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+{% extends "masterpage.html" %}
+
+    {% block title %}
+        <title>Tracks Index</title>
+    {% endblock %} 
+
+    {% block body %}
+        <div class="d-flex align-items-center justify-content-center vh-100 flex-column gap-4">
+            <form class="d-flex" id="form-tracks">
+            <select class="form-control me-1" id="select-track" name="genre">
+                <option value="" selected disabled>Please select a genre</option>
+                {% for key in genres_keys %}
+                    <option value="{{ key }}">{{ key }}</option>
+                {% endfor %}
+            </select>  
+            <button disabled class="btn btn-outline-primary" type="submit" id="search-track">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            </form>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+        <script>
+            function objectifyForm(formArray) {
+                //serialize data function
+                var returnDict = {};
+                for (var i = 0; i < formArray.length; i++){
+                    returnDict[formArray[i]['name']] = formArray[i]['value'];
+                }
+                return returnDict;
+            }
+
+            $(document).ready(function () {
+                $('#form-tracks').submit(function (event) {
+                    event.preventDefault();
+                    var data = objectifyForm($(this).serializeArray());
+                    window.location.href = window.location.pathname + data['genre'];
+                });
+                $('#select-track').change(function () {
+                    $('#search-track').attr('disabled', false);
+                });
+            });
+        </script>
+    {% endblock %}

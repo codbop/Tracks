@@ -1,0 +1,52 @@
+<!doctype html>
+{% extends "masterpage.html" %}
+
+    {% block title %}
+        <title>Tracks Results</title>
+    {% endblock %} 
+
+    {% block head %}
+        {% load static %}
+        <link href="{% static 'css/tracks_list.css' %}" rel="stylesheet">
+    {% endblock %}  
+
+    {% block body %}
+        <div class="d-flex justify-content-center" style="margin-top:10px;">
+            <a href="/tracks" style="color: purple;">Return To Index Page</a>
+        </div>
+        <div class="container tbl-container">
+            <div class="row tbl-fixed">
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            {% for track in tracks|slice:":1" %}
+                                <th>#</th>
+                                {% for key, value in track.items %}
+                                    <th>{{ key }}</th>
+                                {% endfor %}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for track in tracks %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                {% for key, value in track.items %}
+                                    {% if key == 'album_image_url' %}
+                                        <td><img src={{ value }}></td>
+                                    {% elif key == 'preview_url' %}
+                                        <td><a href={{ value }}>preview</a></td>
+                                    {% else %}
+                                        <td>{{ value }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
